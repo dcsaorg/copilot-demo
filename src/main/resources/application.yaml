@@ -1,2 +1,22 @@
+# spring application.yml config to connect to postgresql database
+# with username : admin and password : password
+# load schema.sql and data.sql on startup
 
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
+    username: ${DB_USER:admin}
+    password: ${DB_PASSWORD:password}
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+  jpa:
+    hibernate:
+      ddl-auto: none
+      defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
 

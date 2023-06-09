@@ -1,0 +1,23 @@
+# create a docker compose scrip to setup a light weight version of postgress
+
+version: '3'
+services:
+  demo-db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+  copilot-demo:
+    image: copilot-demo
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - demo-db
+    environment:
+      - "DB_HOST=demo-db"
