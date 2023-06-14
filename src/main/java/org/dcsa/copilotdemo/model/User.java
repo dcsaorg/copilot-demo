@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 // User object has attributes first name, last name, email, and password
 // implement getters, setters, toString and hashCode
@@ -24,7 +25,9 @@ public class User {
     private UUID id;
     private String firstName;
     private String lastName;
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Invalid email format")
     private String email;
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$", message = "Invalid password format")
     private String password;
 
   // implement getters, setters, toString and hashCode
